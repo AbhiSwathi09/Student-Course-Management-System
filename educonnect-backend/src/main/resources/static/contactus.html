@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Contact Us</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* -------------------------------------------------------------
+        * All CSS for your website styling.
+        * This should ideally be in a separate CSS file (e.g., 'style.css')
+        * linked to all your HTML pages.
+        -------------------------------------------------------------
+        */
+
+        /* General Body Styling - Current Colors (Deep Blue & Muted Gold) */
+        body {
+            font-family: 'Arial', sans-serif; /* Fallback font */
+            margin: 0;
+            background-color: #F0F8FF; /* Very pale blue for overall page background */
+            color: #34495E; /* Dark blue-gray for main text readability */
+            line-height: 1.6;
+        }
+
+        /* --- Navbar Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .navbar {
+            background-color: #2C3E50; /* Deep Midnight Blue for navbar background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+            position: sticky; 
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; 
+        }
+
+        /* Styling for the entire logo area (both EC text and EduConnect text) */
+        .logo {
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: color 0.3s ease-in-out; 
+        }
+        /* Hover effect for the whole logo area - applies to all text within .logo */
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* --- Specific CSS for the "EC" Text Logo (Style 1: Modern & Bold) --- */
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 2.2em; 
+            color: #FFFFFF; /* White for the 'E' */
+            letter-spacing: -1.5px; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Muted Gold for the 'C' (accent) */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        /* --- EduConnect Text beside logo --- */
+        .logo-text {
+            font-family: 'Arial', sans-serif; 
+            font-size: 1.4em; 
+            color: #FFFFFF; 
+            font-weight: 500; 
+            margin-left: 10px; 
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+        }
+
+        .navbar ul li {
+            margin-left: 35px; 
+        }
+
+        /* Applies to ALL direct <a> children of .navbar ul li,
+           including standard links and the .dropbtn */
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0; 
+            display: block; 
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; 
+            transform: translateY(-2px); 
+        }
+
+        /* --- Dropdown for Account (Login/Register box) Styling --- */
+        .navbar-dropdown {
+            position: relative; 
+        }
+
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; 
+            border: none; 
+            cursor: pointer; 
+        }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #2C3E50; 
+            min-width: 160px; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; 
+            right: 0; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; 
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; 
+            color: #FFFFFF;
+        }
+
+        .navbar-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        /* --- Main Content Styling (applies to all pages) --- */
+        .main-content {
+            padding: 60px 25px; 
+            max-width: 1200px; 
+            margin: 40px auto; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+        }
+
+        .main-content h1 {
+            color: #2C3E50; 
+            font-size: 2.8em; 
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+        }
+        
+        .main-content > p { 
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555555; 
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* --- Contact Us Specific Styling --- */
+        .contact-hero-banner {
+            width: 100%; /* Make it full width */
+            padding: 20px 0; /* Add some vertical padding */
+            background-color: #2C3E50; /* Deep blue background for the banner section */
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px; /* Space between banner and main content */
+        }
+
+        .contact-hero-banner img {
+            max-width: 80%; /* Allow the image to be larger than 1000px wide */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-hero-banner img:hover {
+            transform: scale(1.01);
+        }
+
+        .contact-content-grid {
+            display: flex; /* Use flexbox for two columns */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 40px; /* Space between columns */
+            justify-content: center; /* Center content horizontally */
+            padding: 20px 0;
+            text-align: left; /* Default text alignment for sections */
+        }
+
+        .contact-info,
+        .contact-form-wrapper {
+            flex: 1; /* Each takes equal space */
+            min-width: 300px; /* Minimum width before wrapping */
+            padding: 30px;
+            background-color: #F8F8F8; /* Light background for sections */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px; /* For when they stack on mobile */
+        }
+
+        .contact-info h2,
+        .contact-form-wrapper h2 {
+            color: #2C3E50; /* Deep Blue for section headings */
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #EEE;
+            padding-bottom: 10px;
+        }
+
+        .contact-info p {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+            color: #34495E;
+        }
+
+        .contact-info a {
+            color: #F3C622; /* Muted Gold for links */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #DAA520;
+            text-decoration: underline;
+        }
+
+        /* Social media links styling */
+        .social-links {
+            margin-top: 25px;
+            margin-bottom: 30px; /* Space before map */
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.2em;
+            color: #2C3E50; /* Deep Blue for social icons */
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* Google Map Container Styling */
+        .map-container {
+            margin-top: 30px;
+            border-radius: 8px; /* Rounded corners for the map container */
+            overflow: hidden; /* Ensures map border-radius applies */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Shadow for the map */
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width = 9 / 16 = 0.5625) */
+            height: 0; /* Important for padding-bottom trick */
+            background-color: #e0e0e0; /* Placeholder background while map loads */
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0; /* Remove iframe default border */
+        }
+
+
+        /* Form Styling */
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495E;
+            font-size: 0.95em;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box; /* Include padding/border in width */
+        }
+
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: #F3C622; /* Muted Gold focus */
+            box-shadow: 0 0 8px rgba(243, 198, 34, 0.3); /* Subtle glow */
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            background-color: #F3C622; /* Muted Gold button */
+            color: #2C3E50; /* Deep Blue text */
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .contact-form button:hover {
+            background-color: #DAA520; /* Darker gold on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-content-grid {
+                flex-direction: column; /* Stack columns on mobile */
+                gap: 20px; /* Reduce gap when stacked */
+            }
+            .contact-hero-banner img {
+                max-width: 95%; /* Adjust for smaller screens */
+            }
+        }
+        .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\home.html">Home</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\course-catalog.html">Course Catalog</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\features.html">Features</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\about us.html">About Us</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\development.html">Development Page</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\contactus.html">Contact Us</a></li>
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="contact-hero-banner">
+        <a href="#"> <img src="https://thumbs.dreamstime.com/b/contact-us-word-banner-writing-55916887.jpg" alt="Contact Us Banner" class="contact-hero-image">
+        </a>
+    </div>
+
+    <div class="main-content">
+        <h1>Connect With EduConnect</h1>
+        <p>Whether you have questions, feedback, or need support, our team is here to help. Reach out to us through the form below or using our direct contact details.</p>
+        
+        <div class="contact-content-grid">
+            <div class="contact-info">
+                <h2>Our Contact Details</h2>
+                <p>Have a direct query? Feel free to reach out to us using the information below. We aim to respond to all inquiries within 24-48 business hours.</p>
+                
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@educonnect.com">info@educonnect.com</a><br>
+                </p>
+                <p>
+                    <strong>Phone:</strong> <a href="tel:+911234567890">+91 123 456 7890</a><br>
+                </p>
+                <p>
+                    <strong>Address:</strong><br>
+                    EduConnect Headquarters<br>
+                    123 EduConnect Lane<br>
+                    Learning City, Andhra Pradesh, India
+                </p>
+
+                <div class="social-links">
+                    <p><strong>Follow Us:</strong></p>
+                    <a href="#" target="_blank">Facebook</a> | 
+                    <a href="#" target="_blank">Twitter</a> | 
+                    <a href="#" target="_blank">LinkedIn</a>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 20px; color: #2C3E50;">Our Location</h3>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15303.11195655959!2d80.56942085!3d16.444736350000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4a06bb71691a03%3A0xf6f32e93d7c3d258!2sMangalagiri%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <h2>Send Us a Message</h2>
+                <form action="#" method="POST" class="contact-form">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer> </body>
+</html>

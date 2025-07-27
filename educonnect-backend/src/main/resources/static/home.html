@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Your Learning Hub</title>
+    
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* -------------------------------------------------------------
+         * All CSS for your website styling.
+         * For larger projects, it's highly recommended to move this 
+         * into a separate CSS file (e.g., 'style.css') and link it:
+         * <link rel="stylesheet" href="css/style.css">
+         -------------------------------------------------------------
+         */
+
+        /* General Body Styling - Current Colors (Deep Blue & Muted Gold) */
+        body {
+            font-family: 'Arial', sans-serif; /* Fallback font */
+            margin: 0;
+            background-color: #F0F8FF; /* Very pale blue for overall page background */
+            color: #34495E; /* Dark blue-gray for main text readability */
+            line-height: 1.6;
+        }
+
+        /* --- Navbar Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .navbar {
+            background-color: #2C3E50; /* Deep Midnight Blue for navbar background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+            position: sticky; 
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; 
+        }
+
+        /* Styling for the entire logo area (both EC text and EduConnect text) */
+        .logo {
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: color 0.3s ease-in-out; 
+        }
+        /* Hover effect for the whole logo area - applies to all text within .logo */
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* --- Specific CSS for the "EC" Text Logo (Style 1: Modern & Bold) --- */
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 2.2em; 
+            color: #FFFFFF; /* White for the 'E' */
+            letter-spacing: -1.5px; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Muted Gold for the 'C' (accent) */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        /* --- New CSS for the "EduConnect" Text --- */
+        .logo-text {
+            font-family: 'Arial', sans-serif; 
+            font-size: 1.4em; 
+            color: #FFFFFF; 
+            font-weight: 500; 
+            margin-left: 10px; 
+            transition: color 0.3s ease-in-out; 
+        }
+
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Makes list items horizontal */
+        }
+
+        .navbar ul li {
+            margin-left: 35px; /* Spacing between all nav items */
+        }
+
+        /* This applies to ALL direct <a> children of .navbar ul li,
+           including your standard links and the .dropbtn */
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0; /* Add vertical padding for larger clickable area */
+            display: block; /* Makes the entire list item's link area clickable */
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; /* Muted Gold on hover */
+            transform: translateY(-2px); 
+        }
+
+        /* --- Dropdown for Account (Login/Register box) Styling --- */
+        .navbar-dropdown {
+            position: relative; 
+            /* The margin-left is now handled by .navbar ul li, so no need to repeat here */
+        }
+
+        /* The .dropbtn inherits most styling from .navbar ul li a.
+           Only add specific overrides for its role as a dropdown trigger. */
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; /* Ensure no background */
+            border: none; /* Ensure no border */
+            cursor: pointer; /* Indicate it's clickable */
+            /* All other text/display styles are inherited from .navbar ul li a */
+        }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #2C3E50; /* Use navbar color for dropdown background */
+            min-width: 160px; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; 
+            right: 0; /* Align to the right edge of the parent dropdown button */
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; 
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; /* Slightly darker blue-gray on hover for dropdown items */
+            color: #FFFFFF;
+        }
+
+        /* Show the dropdown menu on hover */
+        .navbar-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        /* --- Main Content Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .main-content {
+            padding: 60px 25px; 
+            max-width: 900px; 
+            margin: 40px auto; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+        }
+
+        .main-content h1 {
+            color: #2C3E50; /* Use the Deep Midnight Blue for main headings */
+            font-size: 2.8em; 
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+        }
+
+        .main-content p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555555; /* Standard gray for paragraph text */
+            margin-bottom: 20px;
+        }
+
+        .call-to-action-button {
+            display: inline-block;
+            background-color: #F3C622; /* Muted Gold for call to action button */
+            color: #2C3E50; /* Deep Midnight Blue text for contrast on the accent button */
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+
+        .call-to-action-button:hover {
+            background-color: #DAA520; /* Slightly darker gold on hover for button */
+            transform: translateY(-3px);
+        }
+        /* --- New CSS for Course Cards --- */
+
+/* Container for all course cards - creates a responsive grid-like layout */
+.courses-container {
+    display: flex; /* Use flexbox for arranging cards */
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center; /* Center cards horizontally in the container */
+    gap: 30px; /* Space between the cards */
+    padding: 20px;
+    margin-top: 30px; /* Space from the "Available Courses" heading */
+}
+
+/* Individual Course Card Styling */
+.course-card {
+    background-color: #ffffff; /* White background for the card */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    overflow: hidden; /* Ensures content inside respects border-radius */
+    width: 320px; /* Fixed width for consistency */
+    max-width: 100%; /* Ensures it's responsive on smaller screens */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+    display: flex;
+    flex-direction: column; /* Stack image and content vertically */
+}
+
+.course-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+/* Course Image Styling */
+.course-image {
+    width: 100%; /* Image takes full width of the card */
+    height: 200px; /* Fixed height for consistent image size across cards */
+    object-fit: cover; /* Crops image to cover the area without distorting aspect ratio */
+    border-bottom: 1px solid #eee; /* Light border below the image */
+}
+
+/* Content Area within the card (title, description, details) */
+.card-content {
+    padding: 20px;
+    flex-grow: 1; /* Allows content to take up available vertical space */
+    display: flex;
+    flex-direction: column; /* Stack content elements vertically */
+}
+
+.course-card h3 {
+    color: #2C3E50; /* Deep Midnight Blue for headings */
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.course-description {
+    color: #555555; /* Standard gray for description text */
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: left;
+    flex-grow: 1; /* Allows description to push buttons to the bottom */
+}
+
+.course-details p {
+    margin: 5px 0; /* Small vertical spacing for detail lines */
+    font-size: 0.88em;
+    color: #666; /* Slightly lighter gray for details */
+    text-align: left;
+}
+
+.course-details strong {
+    color: #34495E; /* Darker blue for emphasis on labels */
+}
+
+/* Action buttons at the bottom of the card */
+.card-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around; /* Distribute buttons horizontally */
+    gap: 10px; /* Space between buttons */
+}
+
+.card-actions button {
+    background-color: #F3C622; /* Muted Gold */
+    color: #2C3E50; /* Deep Midnight Blue for button text */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex: 1; /* Allows buttons to take equal width */
+}
+
+.card-actions button:hover {
+    background-color: #DAA520; /* Darker Gold on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+        .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="course-catalog.html">Course Catalog</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about us.html">About Us</a></li>
+                <li><a href="development.html">Development Page</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>Welcome to EduConnect! Your Journey Starts Here.</h1>
+        <p>Empowering students with seamless access to courses and resources, and providing instructors with intuitive tools for effective course management.</p>
+        <p>Whether you're looking to expand your knowledge or manage your classes, EduConnect is designed to make your academic life easier and more connected.</p>
+        
+       <h2>Available Courses:</h2>
+    <div id="courses-container">
+        <p>Loading courses...</p>
+    </div>
+        <a href="register.html" class="call-to-action-button">Join EduConnect Today!</a>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

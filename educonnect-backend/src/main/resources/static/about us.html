@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - About Us</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts Import for 'Montserrat' (used for the EC text logo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* -------------------------------------------------------------
+        * All CSS for your website styling.
+        * This should ideally be in a separate CSS file (e.g., 'style.css')
+        * linked to all your HTML pages.
+        -------------------------------------------------------------
+        */
+
+        /* General Body Styling - Current Colors (Deep Blue & Muted Gold) */
+        body {
+            font-family: 'Arial', sans-serif; /* Fallback font */
+            margin: 0;
+            background-color: #F0F8FF; /* Very pale blue for overall page background */
+            color: #34495E; /* Dark blue-gray for main text readability */
+            line-height: 1.6;
+        }
+
+        /* --- Navbar Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .navbar {
+            background-color: #2C3E50; /* Deep Midnight Blue for navbar background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+            position: sticky; 
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; 
+        }
+
+        /* Styling for the entire logo area (both EC text and EduConnect text) */
+        .logo {
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: color 0.3s ease-in-out; 
+        }
+        /* Hover effect for the whole logo area - applies to all text within .logo */
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* --- Specific CSS for the "EC" Text Logo (Style 1: Modern & Bold) --- */
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 2.2em; 
+            color: #FFFFFF; /* White for the 'E' */
+            letter-spacing: -1.5px; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Muted Gold for the 'C' (accent) */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        /* --- EduConnect Text beside logo --- */
+        .logo-text {
+            font-family: 'Arial', sans-serif; 
+            font-size: 1.4em; 
+            color: #FFFFFF; 
+            font-weight: 500; 
+            margin-left: 10px; 
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+        }
+
+        .navbar ul li {
+            margin-left: 35px; 
+        }
+
+        /* Applies to ALL direct <a> children of .navbar ul li,
+           including standard links and the .dropbtn */
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0; 
+            display: block; 
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; 
+            transform: translateY(-2px); 
+        }
+
+        /* --- Dropdown for Account (Login/Register box) Styling --- */
+        .navbar-dropdown {
+            position: relative; 
+        }
+
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; 
+            border: none; 
+            cursor: pointer; 
+        }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #2C3E50; 
+            min-width: 160px; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; 
+            right: 0; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; 
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; 
+            color: #FFFFFF;
+        }
+
+        .navbar-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        /* --- Main Content Styling (applies to all pages) --- */
+        .main-content {
+            padding: 60px 25px; 
+            max-width: 1200px; /* Wider for full container sections */
+            margin: 40px auto; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+        }
+
+        .main-content h1 {
+            color: #2C3E50; 
+            font-size: 2.8em; 
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+        }
+        
+        .main-content > p { 
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555555; 
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* --- Call to Action Button (General Style) --- */
+        .call-to-action-button {
+            display: inline-block;
+            background-color: #F3C622; 
+            color: #2C3E50; 
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+
+        .call-to-action-button:hover {
+            background-color: #DAA520; 
+            transform: translateY(-3px);
+        }
+
+        /* --- About Us Specific Styling (Full Containers with Image/Text) --- */
+        .about-section-container {
+            width: 100%; /* Full width container */
+            padding: 60px 0; /* Vertical padding for each section */
+            margin-bottom: 30px; /* Space between sections */
+            background-color: #ffffff; /* Default background */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+            border-radius: 12px; /* Rounded corners for the entire container */
+            overflow: hidden; /* Ensures content stays within rounded corners */
+        }
+        
+        /* Alternate background colors for sections */
+        .about-section-container:nth-child(even) {
+            background-color: #F8F8F8; /* A lighter gray for alternating sections */
+        }
+
+        .about-content-block {
+            max-width: 1000px; /* Max width for content inside the container */
+            margin: 0 auto;
+            padding: 0 25px; /* Horizontal padding */
+            display: flex;
+            align-items: center; /* Vertically align content */
+            gap: 50px; /* Space between image and text */
+            flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+            text-align: left; /* Default text alignment */
+        }
+
+        .about-content-block.media-left {
+            flex-direction: row; /* Image on left, text on right */
+        }
+
+        .about-content-block.media-right {
+            flex-direction: row-reverse; /* Image on right, text on left */
+        }
+        
+        /* Ensure columns stack correctly on mobile */
+        @media (max-width: 768px) {
+            .about-content-block {
+                flex-direction: column; /* Stack image and text vertically */
+                text-align: center; /* Center text on mobile */
+            }
+            .about-content-block.media-right .image-wrapper {
+                order: 0; /* Ensure image is always on top when stacked */
+            }
+            .about-content-block.media-right .text-wrapper {
+                 order: 1;
+            }
+        }
+
+        .image-wrapper {
+            flex: 1; /* Take up available space */
+            min-width: 300px; /* Minimum width before wrapping */
+            text-align: center;
+        }
+
+        .image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Rounded corners for images */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Stronger shadow for images */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .image-wrapper img:hover {
+            transform: scale(1.02); /* Slight zoom on hover */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .text-wrapper {
+            flex: 1;
+            min-width: 300px; /* Minimum width before wrapping */
+        }
+
+        .text-wrapper h2 {
+            color: #2C3E50; /* Deep Blue for section titles */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: left; /* Align section titles left */
+        }
+        
+        @media (max-width: 768px) {
+            .text-wrapper h2 {
+                text-align: center; /* Center section titles on mobile */
+            }
+        }
+
+        .text-wrapper p {
+            font-size: 1.05em;
+            color: #34495E;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .about-values-list { /* For values section, if needed in this layout */
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .about-values-list li {
+            background-color: #ECF0F1; /* Light gray */
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #2C3E50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+         .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- The "EC" Text Logo with Montserrat font and dual colors -->
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <!-- The "EduConnect" text placed after the EC logo -->
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\home.html">Home</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\course-catalog.html">Course Catalog</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\features.html">Features</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\about us.html">About Us</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\development.html">Development Page</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\contactus.html">Contact Us</a></li>
+                
+                <!-- Dropdown for Login & Register pages in a "box" -->
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>About EduConnect: Our Story & Philosophy</h1>
+        <p>At EduConnect, we are driven by a singular vision: to empower individuals through accessible and high-quality education. Discover our journey, values, and what makes us tick.</p>
+    </div>
+
+    <!-- Section 1: Our Story / Who We Are (Image Left, Text Right) -->
+    <div class="about-section-container">
+        <div class="about-content-block media-left">
+            <div class="image-wrapper">
+                <img src="https://assets.usestyle.ai/i/c92fedf1-ca38-485e-875b-72bb88c6122f" alt="Team collaborating on a project">
+            </div>
+            <div class="text-wrapper">
+                <h2>Our Story: Connecting Minds</h2>
+                <p>EduConnect was founded on the belief that learning should be a fluid, engaging, and globally accessible experience. We started as a small team of educators and technologists with a passion for innovation, aiming to break down traditional barriers to knowledge. Our journey has been about continuous improvement, listening to our community, and building a platform that truly serves the needs of both students and instructors.</p>
+                <p>From humble beginnings, we've grown into a thriving hub for diverse learners, providing tools and resources that foster academic excellence and professional growth.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Our Mission & Vision (Image Right, Text Left) -->
+    <div class="about-section-container">
+        <div class="about-content-block media-right">
+            <div class="image-wrapper">
+                <img src="https://t3.ftcdn.net/jpg/07/46/45/64/360_F_746456456_q2tgfHhHu9CIvlVp6AzbPRvaSNh8tMm7.jpg">
+            </div>
+            <div class="text-wrapper">
+                <h2>Our Mission & Vision</h2>
+                <p><strong>Mission:</strong> To democratize education by providing an intuitive, engaging, and affordable online learning platform that supports continuous skill development and personal growth for a global audience.</p>
+                <p><strong>Vision:</strong> We envision a world where knowledge is shared freely and effectively, breaking down barriers to learning and enabling individuals to unlock their full potential, fostering innovation and positive change across communities.</p>
+                <p>We are committed to creating an inclusive environment where every learner feels empowered to pursue their intellectual curiosity and achieve their educational aspirations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Our Values & Approach (Image Left, Text Right) -->
+    <div class="about-section-container">
+        <div class="about-content-block media-left">
+            <div class="image-wrapper">
+                <img src="https://media.licdn.com/dms/image/v2/C4D12AQH-LYGcf2pJlg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1646252906020?e=2147483647&v=beta&t=nnSp-siUO2jWUYyqEvnkeyKCn-W5GOlGMLaUnMToKyQ" alt="Hands building blocks, symbolizing values">
+            </div>
+            <div class="text-wrapper">
+                <h2>Our Core Values</h2>
+                <p>Our work at EduConnect is guided by a strong set of principles that shape everything we do:</p>
+                <ul class="about-values-list">
+                    <li><strong>Accessibility:</strong> Education for all.</li>
+                    <li><strong>Innovation:</strong> Continuously evolving our platform.</li>
+                    <li><strong>Excellence:</strong> High-quality content & instruction.</li>
+                    <li><strong>Community:</strong> Fostering collaboration.</li>
+                    <li><strong>Integrity:</strong> Upholding trust and transparency.</li>
+                    <li><strong>Empowerment:</strong> Helping users achieve their goals.</li>
+                </ul>
+                <p>These values are the bedrock of our commitment to our learners, instructors, and the broader educational community.</p>
+            </div>
+        </div>
+    </div>
+
+      <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Add more sections as needed, alternating media-left/media-right -->
+    <!-- For example, a "Meet Our Team" section or "Why Choose Us" -->
+
+
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Login</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* -------------------------------------------------------------
+        * All CSS for your website styling.
+        * Ideally, this should be in a separate CSS file (e.g., 'style.css')
+        * linked to all your HTML pages for better maintainability.
+        -------------------------------------------------------------
+        */
+
+        /* General Body Styling - Current Colors (Deep Blue & Muted Gold) */
+        body {
+            font-family: 'Arial', sans-serif; /* Fallback font */
+            margin: 0;
+            background-color: #F0F8FF; /* Very pale blue for overall page background, as requested */
+            color: #34495E; /* Dark blue-gray for main text readability */
+            line-height: 1.6;
+        }
+
+        /* --- Navbar Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .navbar {
+            background-color: #2C3E50; /* Deep Midnight Blue for navbar background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+            position: sticky; 
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; 
+        }
+
+        /* Styling for the entire logo area (both EC text and EduConnect text) */
+        .logo {
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: color 0.3s ease-in-out; 
+        }
+        /* Hover effect for the whole logo area - applies to all text within .logo */
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* --- Specific CSS for the "EC" Text Logo (Style 1: Modern & Bold) --- */
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 2.2em; 
+            color: #FFFFFF; /* White for the 'E' */
+            letter-spacing: -1.5px; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Muted Gold for the 'C' (accent) */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        /* --- EduConnect Text beside logo --- */
+        .logo-text {
+            font-family: 'Arial', sans-serif; 
+            font-size: 1.4em; 
+            color: #FFFFFF; 
+            font-weight: 500; 
+            margin-left: 10px; 
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+        }
+
+        .navbar ul li {
+            margin-left: 35px; 
+        }
+
+        /* Applies to ALL direct <a> children of .navbar ul li,
+           including standard links and the .dropbtn */
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0; 
+            display: block; 
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; 
+            transform: translateY(-2px); 
+        }
+
+        /* --- Dropdown for Account (Login/Register box) Styling --- */
+        .navbar-dropdown {
+            position: relative; 
+        }
+
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; 
+            border: none; 
+            cursor: pointer; 
+        }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #2C3E50; 
+            min-width: 160px; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; 
+            right: 0; /* Align dropdown to the right of its parent */
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; 
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; 
+            color: #FFFFFF;
+        }
+
+        .navbar-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        /* --- Main Content Styling (applies to all pages) --- */
+        .main-content {
+            padding: 60px 25px; 
+            max-width: 1200px; 
+            margin: 40px auto; 
+            background-color: #ffffff; /* White background for the main container */
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+        }
+
+        /* Specific styles for the login/register forms */
+        .form-container {
+            max-width: 500px; /* Max width for the form box */
+            margin: 40px auto; /* Center the form container */
+            padding: 30px 40px;
+            background-color: #fcfcfc; /* Slightly off-white for form background */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: left; /* Align form elements to the left */
+        }
+
+        .form-container h2 {
+            color: #2C3E50;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495E;
+            font-size: 1em;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"] { /* Added text type for register name */
+            width: calc(100% - 24px); /* Full width minus padding and border */
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #F3C622;
+            box-shadow: 0 0 8px rgba(243, 198, 34, 0.3);
+            outline: none;
+        }
+
+        /* Validation error message styling */
+        .form-group .error-message {
+            color: #E74C3C; /* Red for errors */
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block; /* Ensure it's on its own line */
+        }
+
+        /* Highlight invalid fields */
+        .form-group input.invalid {
+            border-color: #E74C3C;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        .form-actions button {
+            background-color: #F3C622;
+            color: #2C3E50;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .form-actions button:hover {
+            background-color: #DAA520;
+            transform: translateY(-2px);
+        }
+
+        .form-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-links a {
+            color: #2C3E50;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .form-links a:hover {
+            color: #F3C622;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2); /* Make checkbox slightly larger */
+        }
+        .checkbox-group label {
+            margin-bottom: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .form-container {
+                margin: 20px auto;
+                padding: 25px;
+            }
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .form-actions button {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .form-links a {
+                display: block;
+                margin-bottom: 10px;
+            }
+        } .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\home.html">Home</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\course-catalog.html">Course Catalog</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\features.html">Features</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\about us.html">About Us</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\development.html">Development Page</a></li>
+                <li><a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\contactus.html">Contact Us</a></li>
+                
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\login.html">Login</a>
+                        <a href="C:\Users\abhim\OneDrive\Desktop\Java full stack\register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Login to Your Account</h2>
+            <form id="loginForm" action="#" method="POST">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address:</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                <div class="form-actions">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+            <div class="form-links">
+                <a href="#">Forgot Password?</a>
+                <span>|</span>
+                <a href="register.html">Don't have an account? Register</a>
+            </div>
+        </div>
+    </div> <script src="C:\Users\abhim\OneDrive\Desktop\Java full stack\login-validation.js"></script>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
