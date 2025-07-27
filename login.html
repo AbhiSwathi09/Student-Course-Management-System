@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Login - EduConnect</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Body Styling - Adjusted for Navbar/Footer */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F0F8FF; /* Consistent light blue background */
+            font-family: Arial, sans-serif;
+            min-height: 100vh; /* Ensure body takes full viewport height for footer to be at bottom */
+            display: flex; /* Use flexbox for overall page layout */
+            flex-direction: column; /* Stack navbar, main-content, footer vertically */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #2C3E50; /* Darker blue-grey */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            position: sticky; /* Makes navbar stick to the top */
+            top: 0;
+            z-index: 1000; /* Ensures it stays above other content */
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; /* Horizontal padding */
+        }
+
+        .logo {
+            text-decoration: none; /* Remove underline */
+            display: flex; /* Align logo elements */
+            align-items: center;
+            transition: color 0.3s ease-in-out; /* Smooth transition */
+        }
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Yellow on hover */
+        }
+
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; /* Montserrat font */
+            font-size: 2.2em; /* Large size */
+            color: #FFFFFF; /* White color */
+            letter-spacing: -1.5px; /* Tighten spacing */
+            font-weight: 700; /* Bold */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Subtle shadow */
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Yellow for the 'C' */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .logo-text {
+            font-family: 'Arial', sans-serif; /* Arial for general text */
+            font-size: 1.4em; /* Standard size */
+            color: #FFFFFF; /* White color */
+            font-weight: 500;
+            margin-left: 10px; /* Space from logo icon */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .navbar ul {
+            list-style: none; /* Remove bullet points */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Arrange list items horizontally */
+        }
+
+        .navbar ul li {
+            margin-left: 35px; /* Space between navigation items */
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; /* Semi-bold */
+            font-size: 1.08em; /* Slightly larger text */
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth transitions */
+            padding: 10px 0; /* Padding for click area */
+            display: block; /* Make the whole padding area clickable */
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; /* Yellow on hover/focus */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        /* Dropdown for Account */
+        .navbar-dropdown {
+            position: relative; /* Container for dropdown positioning */
+        }
+
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; /* No background */
+            border: none; /* No border */
+            cursor: pointer; /* Pointer on hover */
+        }
+
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #2C3E50; /* Same as navbar background */
+            min-width: 160px; /* Minimum width */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Dropdown shadow */
+            z-index: 1; /* Ensure it's above other content */
+            right: 0; /* Align to the right of the parent */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow for rounded corners */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; /* Align text left */
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; /* Slightly lighter dark blue-grey on hover */
+            color: #FFFFFF;
+        }
+
+        .navbar-dropdown:hover .dropdown-content {
+            display: block; /* Show dropdown on hover */
+        }
+
+        /* Main Content Styling for pages with Navbar/Footer */
+        .main-content {
+            flex-grow: 1; /* Allows main content to take up available vertical space */
+            padding: 60px 25px; /* Consistent padding */
+            max-width: 1200px;
+            margin: 40px auto; /* Centers horizontally and provides vertical space */
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            display: flex; /* Use flexbox to center login container vertically */
+            justify-content: center; /* Center login container horizontally */
+            align-items: center; /* Center login container vertically */
+            min-height: calc(100vh - 200px); /* Adjust based on navbar/footer height to push footer down */
+        }
+
+        /* Login Form Specific Styling */
+        .login-container {
+            background-color: white; /* Consistent background */
+            padding: 2rem; /* Adjusted padding as per your latest version */
+            border-radius: 10px; /* Adjusted border-radius */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Adjusted box-shadow */
+            width: 300px;
+            text-align: center; /* Centering for h2, etc. */
+        }
+        
+        .login-container h2 {
+            text-align: center; /* Ensures h2 is centered within its container */
+            color: #333;
+            margin-bottom: 20px; /* Consistent margin */
+        }
+
+        input { /* Targets all input elements */
+            width: 100%;
+            padding: 0.5rem; /* Consistent padding */
+            margin: 0.5rem 0; /* Consistent margin */
+            border: 1px solid #ccc;
+            border-radius: 5px; /* Consistent border-radius */
+            box-sizing: border-box; /* Include padding in element's total width */
+        }
+
+        /* Login Button Styling (Matches Navbar Accent Color) */
+        button {
+            width: 100%;
+            padding: 0.6rem; /* Consistent padding */
+            background-color: #F3C622; /* EduConnect Yellow (as accent) */
+            color: #2C3E50; /* Dark text for contrast */
+            border: none;
+            border-radius: 5px; /* Consistent border-radius */
+            font-size: 1rem; /* Consistent font-size */
+            cursor: pointer;
+            font-weight: bold; /* Make button text bold */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #DAA520; /* Darker yellow on hover */
+            transform: translateY(-2px); /* Slight lift */
+        }
+
+        .error { /* Renamed from #message to .error as per your latest code */
+            margin-top: 10px; /* Consistent margin */
+            font-size: 14px; /* Consistent font-size */
+            color: red;
+            text-align: center;
+            font-weight: bold; /* Added for emphasis */
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom of the flex container (body) */
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 600px) { /* On screens up to 600px wide (e.g., mobile) */
+            .navbar-container {
+                flex-direction: column;
+                padding: 0 15px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px;
+            }
+            .navbar ul li {
+                margin: 10px 0;
+            }
+            .navbar-dropdown .dropdown-content {
+                right: auto; /* Reset right alignment */
+                left: 50%; /* Center the dropdown */
+                transform: translateX(-50%); /* Adjust for centering */
+            }
+            .main-content {
+                padding: 30px 15px;
+                margin: 20px auto;
+                min-height: calc(100vh - 150px); /* Adjust min-height for smaller screens */
+            }
+            .login-container {
+                width: 100%; /* Allow login container to take full width on small screens */
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="course-catalog.html">Course Catalog</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about us.html">About Us</a></li>
+                <li><a href="development.html">Development Page</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="login-container">
+            <h2>Student Login</h2>
+            <input type="text" id="username" placeholder="Username" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <button onclick="login()">Login</button>
+            <div id="errorMsg" class="error"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMsgElement = document.getElementById("errorMsg"); // Get the element
+
+            errorMsgElement.innerText = ""; // Clear any previous error message
+
+            fetch("http://localhost:8080/api/students/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // If response is not OK (e.g., 401 Unauthorized, 400 Bad Request)
+                    // we still try to read the error message from the response body if available.
+                    return response.text().then(text => { throw new Error(text || `Login failed with status: ${response.status}`); });
+                }
+                // If response is OK (2xx), parse as JSON
+                return response.json();
+            })
+            .then(student => {
+                // Save student data in localStorage (optional)
+                localStorage.setItem("student", JSON.stringify(student));
+
+                // Display success message and redirect
+                errorMsgElement.style.color = "green";
+                errorMsgElement.innerText = "Login successful! Redirecting to home...";
+                window.location.href = "home.html"; // ✅ Redirect to home page
+            })
+            .catch(error => {
+                console.error("Login error:", error);
+                errorMsgElement.style.color = "red";
+
+                // Check for network errors vs. server-side errors
+                if (error.message.includes("Failed to fetch")) {
+                    errorMsgElement.innerText = "Network error: Could not connect to the backend. Please ensure the server is running.";
+                } else if (error.message.includes("Login failed with status")) {
+                    // This error comes from a non-OK HTTP status, display the generic message for now
+                    errorMsgElement.innerText = "Invalid username or password."; // As per your desired message for non-OK response
+                }
+                else {
+                    // For other unexpected errors, display a generic message
+                    errorMsgElement.innerText = "An unexpected error occurred during login. Please try again.";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

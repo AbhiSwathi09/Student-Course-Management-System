@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Course Catalog</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #F0F8FF; /* Light blue background */
+            color: #34495E; /* Dark blue-grey text */
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #2C3E50; /* Darker blue-grey */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            position: sticky; /* Makes navbar stick to the top */
+            top: 0;
+            z-index: 1000; /* Ensures it stays above other content */
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; /* Horizontal padding */
+        }
+
+        .logo {
+            text-decoration: none; /* Remove underline */
+            display: flex; /* Align logo elements */
+            align-items: center;
+            transition: color 0.3s ease-in-out; /* Smooth transition */
+        }
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Yellow on hover */
+        }
+
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; /* Montserrat font */
+            font-size: 2.2em; /* Large size */
+            color: #FFFFFF; /* White color */
+            letter-spacing: -1.5px; /* Tighten spacing */
+            font-weight: 700; /* Bold */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Subtle shadow */
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Yellow for the 'C' */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .logo-text {
+            font-family: 'Arial', sans-serif; /* Arial for general text */
+            font-size: 1.4em; /* Standard size */
+            color: #FFFFFF; /* White color */
+            font-weight: 500;
+            margin-left: 10px; /* Space from logo icon */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .navbar ul {
+            list-style: none; /* Remove bullet points */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Arrange list items horizontally */
+        }
+
+        .navbar ul li {
+            margin-left: 35px; /* Space between navigation items */
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; /* Semi-bold */
+            font-size: 1.08em; /* Slightly larger text */
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth transitions */
+            padding: 10px 0; /* Padding for click area */
+            display: block; /* Make the whole padding area clickable */
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; /* Yellow on hover/focus */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        /* Dropdown for Account */
+        .navbar-dropdown {
+            position: relative; /* Container for dropdown positioning */
+        }
+
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; /* No background */
+            border: none; /* No border */
+            cursor: pointer; /* Pointer on hover */
+        }
+
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #2C3E50; /* Same as navbar background */
+            min-width: 160px; /* Minimum width */
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Dropdown shadow */
+            z-index: 1; /* Ensure it's above other content */
+            right: 0; /* Align to the right of the parent */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Hide overflow for rounded corners */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; /* Align text left */
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; /* Slightly lighter dark blue-grey on hover */
+            color: #FFFFFF;
+        }
+
+        .navbar-dropdown:hover .dropdown-content {
+            display: block; /* Show dropdown on hover */
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            padding: 60px 25px; 
+            max-width: 1200px;
+            margin: 40px auto; /* Center the main content with vertical margin */
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            text-align: center; /* Center text within main content */
+        }
+
+        .main-content h1 {
+            color: #2C3E50;
+            font-size: 2.8em; 
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+        }
+        
+        .main-content p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555555; 
+            margin-bottom: 20px;
+        }
+
+        /* Course Catalog Specific Styling (for dynamic cards) */
+        .courses-container {
+            display: flex; /* Use flexbox for layout */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            justify-content: center; /* Center cards horizontally when there aren't enough to fill a row */
+            gap: 20px; /* Space between cards - ADJUSTED FROM 30px TO 20px FOR NEW CARD WIDTH */
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .course-card {
+            width: 280px; /* FIXED WIDTH AS PER YOUR LATEST SNIPPET */
+            background: #f4f4f4; /* Lighter background for cards */
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            overflow: hidden; /* Ensures image corners are rounded */
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+            display: flex; /* Makes content inside card arrange vertically */
+            flex-direction: column;
+            
+            /* Responsive width for multiple columns */
+            /* Default: 3 columns for wide screens (adjusting for 280px width + 20px gap) */
+            flex: 0 1 calc(33.333% - (2 * 20px / 3)); /* 33.333% for 3 cards, minus 2/3 of the gap to distribute space */
+            max-width: 280px; /* Keep max-width to the specified 280px */
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+        }
+
+        .course-card img { /* Adjusted from .course-image */
+            width: 100%;
+            height: 160px; /* Adjusted from 200px */
+            object-fit: cover; /* Ensures image covers the area without distortion */
+            border-bottom: 1px solid #eee; /* Subtle separator */
+        }
+
+        .course-content { /* Adjusted from .card-content */
+            padding: 15px; /* Adjusted padding */
+            flex-grow: 1; /* Allows content area to take available space */
+            display: flex;
+            flex-direction: column;
+            text-align: left; /* Ensure text alignment is left within card */
+        }
+
+        .course-title { /* Adjusted from .course-card h3 */
+            font-size: 1.2em; /* Adjusted size */
+            font-weight: bold;
+            color: #2C3E50;
+            margin-top: 0;
+            margin-bottom: 8px; /* Adjusted margin */
+        }
+
+        .course-instructor { /* New class */
+            font-size: 0.9em; /* Adjusted size */
+            color: #666;
+            margin-bottom: 6px; /* Adjusted margin */
+        }
+
+        .course-description { /* Adjusted from .course-description */
+            font-size: 0.85em; /* Adjusted size */
+            color: #444;
+            line-height: 1.5;
+            margin-bottom: 10px; /* Adjusted margin */
+            flex-grow: 1; /* Allows description to take available space */
+        }
+
+        .course-duration { /* New class */
+            font-size: 0.8em; /* Adjusted size */
+            color: #888;
+            margin-top: auto; /* Pushes duration to the bottom */
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 900px) { /* On screens up to 900px wide */
+            .course-card {
+                /* This calculation ensures 2 cards fit perfectly with the specified gap */
+                flex: 0 1 calc(50% - (1 * 20px / 2)); /* 50% for 2 cards, minus 1/2 of the gap */
+                max-width: 280px; /* Maintain fixed width */
+            }
+        }
+
+        @media (max-width: 600px) { /* On screens up to 600px wide (e.g., mobile) */
+            .navbar-container {
+                flex-direction: column;
+                padding: 0 15px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px;
+            }
+            .navbar ul li {
+                margin: 10px 0;
+            }
+            .navbar-dropdown .dropdown-content {
+                right: auto; /* Reset right alignment */
+                left: 50%; /* Center the dropdown */
+                transform: translateX(-50%); /* Adjust for centering */
+            }
+            .main-content {
+                padding: 30px 15px;
+                margin: 20px auto;
+            }
+            .main-content h1 {
+                font-size: 2em;
+            }
+            .course-card {
+                flex: 0 1 100%; /* Full width for 1 card per row */
+                max-width: 350px; /* Allow cards to be slightly wider on small screens if desired, or keep 280px */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="course-catalog.html">Course Catalog</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about us.html">About Us</a></li>
+                <li><a href="development.html">Development Page</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>Explore Our Course Catalog</h1>
+        <p>Discover a wide range of courses designed to enhance your skills and knowledge. From web development to data science, to art and humanities, we have something for everyone. Our expert instructors and flexible learning paths ensure you gain the skills you need for today's dynamic world.</p>
+
+        <div class="courses-container" id="courseList">
+            <p>Loading courses...</p> </div> 
+        <div class="error" id="errorMessage"></div> </div>
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        console.log("Course catalog script loaded."); // Added for debugging confirmation
+
+        // Function to fetch courses from your backend
+        async function fetchCourses() {
+            const courseListContainer = document.getElementById('courseList'); 
+            const errorMessageDisplay = document.getElementById('errorMessage');
+
+            // Show loading state and clear previous error
+            courseListContainer.innerHTML = '<p>Loading courses...</p>'; 
+            errorMessageDisplay.textContent = ''; // Clear any previous error messages
+
+            try {
+                // IMPORTANT: This URL must match the endpoint in your Spring Boot's CourseController
+                const response = await fetch('http://localhost:8080/api/courses'); 
+                
+                if (!response.ok) {
+                    // Check for specific HTTP errors or just use the generic error message
+                    const errorText = await response.text(); // Try to read response as text for more info
+                    throw new Error(`HTTP error! Status: ${response.status}. Message: ${errorText || 'Unknown error'}`);
+                }
+                
+                const courses = await response.json(); 
+
+                // Clear the loading message after successful fetch
+                courseListContainer.innerHTML = ''; 
+
+                if (courses.length === 0) {
+                    courseListContainer.innerHTML = '<p>No courses found at the moment. Please add some from the backend!</p>';
+                    return;
+                }
+
+                // Loop through each course object received from the backend
+                courses.forEach(course => {
+                    const card = document.createElement("div");
+                    card.className = "course-card";
+
+                    card.innerHTML = `
+                        <img src="${course.imageUrl || 'https://via.placeholder.com/280x160?text=No+Image'}" alt="Course Image: ${course.title}">
+                        <div class="course-content">
+                            <div class="course-title">${course.title}</div>
+                            <div class="course-instructor">Instructor: ${course.instructorName}</div>
+                            <div class="course-description">${course.description}</div>
+                            <div class="course-duration">Duration: ${course.durationHours} hours</div>
+                        </div>
+                    `;
+                    courseListContainer.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+                errorMessageDisplay.textContent = `Failed to load courses: ${error.message}. Please ensure your backend is running and you are serving this page from a local web server (e.g., http://localhost:5500) to avoid CORS issues.`;
+                courseListContainer.innerHTML = ''; // Clear loading message if error occurs
+            }
+        }
+
+        // Call the fetchCourses function when the entire HTML document has been loaded and parsed
+        document.addEventListener('DOMContentLoaded', fetchCourses);
+    </script>
+</body>
+</html>

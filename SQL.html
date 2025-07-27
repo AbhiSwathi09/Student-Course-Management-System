@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Database Design and SQL Programming Course</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- General Body and Container Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif; /* Using Open Sans as a general font */
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8; /* A light background for the page */
+        }
+
+        .main-content {
+            max-width: 1000px; /* Max width for the content area */
+            margin: 40px auto; /* Centering with top/bottom margin */
+            padding: 0 20px; /* Horizontal padding for smaller screens */
+        }
+
+        /* --- Navbar Styling --- */
+        .navbar {
+            background-color: #2C3E50; /* Deep Midnight Blue for navbar background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: sticky; /* Keeps navbar at top when scrolling */
+            top: 0;
+            z-index: 1000; /* Ensures navbar is above other content */
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; /* Added horizontal padding */
+        }
+
+        /* Styling for the entire logo area (both EC text and EduConnect text) */
+        .logo {
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: color 0.3s ease-in-out; 
+        }
+        /* Hover effect for the whole logo area - applies to all text within .logo */
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* --- Specific CSS for the "EC" Text Logo (Style 1: Modern & Bold) --- */
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 2.2em; 
+            color: #FFFFFF; /* White for the 'E' */
+            letter-spacing: -1.5px; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Muted Gold for the 'C' (accent) */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        /* --- EduConnect Text beside logo --- */
+        .logo-text {
+            font-family: 'Open Sans', Arial, sans-serif; 
+            font-size: 1.4em; 
+            color: #FFFFFF; 
+            font-weight: 600; 
+            margin-left: 10px; 
+            transition: color 0.3s ease-in-out; 
+        }
+
+        .navbar .nav-links { /* Added .nav-links to be more specific */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Make list items horizontal */
+        }
+
+        .navbar .nav-links li {
+            margin-left: 35px; /* Spacing between main nav items */
+        }
+
+        /* Applies to ALL direct <a> children of .navbar .nav-links li,
+           including standard links and the .dropbtn */
+        .navbar .nav-links li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0; /* Add padding for click area */
+            display: block; /* Make it a block for better click area */
+        }
+
+        .navbar .nav-links li a:hover,
+        .navbar .nav-links li a:focus {
+            color: #F3C622; /* Muted Gold on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        /* --- Dropdown for Account (Login/Register box) Styling --- */
+        .navbar-dropdown {
+            position: relative; /* Needed for absolute positioning of dropdown content */
+        }
+
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; 
+            border: none; 
+            cursor: pointer; 
+            /* The 'a' styling above applies to this too */
+        }
+
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #2C3E50; /* Same as navbar background */
+            min-width: 160px; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; /* Ensure it appears above other content */
+            right: 0; /* Align dropdown to the right of its parent */
+            border-radius: 8px; /* Rounded corners for the dropdown box */
+            overflow: hidden; /* Ensures child elements respect border-radius */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        .dropdown-content a {
+            color: #ffffff; /* White text for dropdown items */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; /* Align text left within dropdown */
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; /* Slightly lighter blue-gray on hover */
+            color: #FFFFFF; /* Text color remains white on hover */
+        }
+
+        /* Show the dropdown menu on hover for desktop */
+        .navbar-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* --- Hamburger/Toggle Button Styles (for mobile) --- */
+        .nav-toggle {
+            display: none; /* Hidden by default on desktop */
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            position: relative; /* For icon animation */
+            z-index: 1001; /* Above nav links when open */
+        }
+
+        .nav-toggle .icon-bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Responsive Navbar Media Query --- */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-wrap: wrap; /* Allow items to wrap when space is tight */
+            }
+
+            .navbar .nav-links { /* Targeting .nav-links specifically */
+                display: none; /* Hide main navigation by default on small screens */
+                flex-direction: column; /* Stack links vertically */
+                width: 100%; /* Take full width */
+                background-color: #2C3E50; /* Same as navbar background */
+                position: absolute;
+                top: 100%; /* Position menu below the navbar */
+                left: 0;
+                padding: 10px 0;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+                z-index: 999;
+            }
+
+            .navbar .nav-links.active { /* Show menu when 'active' class is added by JS */
+                display: flex; 
+            }
+
+            .navbar .nav-links li {
+                margin: 0; /* Reset desktop margin */
+                width: 100%; /* Take full width of parent ul */
+                text-align: center;
+            }
+
+            .navbar .nav-links li a {
+                padding: 12px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator for mobile links */
+            }
+            .navbar .nav-links li:last-child a {
+                border-bottom: none; /* No border for the last item */
+            }
+
+            /* Mobile Dropdown Behavior (click to toggle) */
+            .navbar-dropdown .dropdown-content {
+                position: static; /* Remove absolute positioning for mobile */
+                box-shadow: none;
+                background-color: #3D566E; /* Slightly different background for sub-menu */
+                width: 100%;
+                max-height: 0; /* Hidden by default */
+                overflow: hidden;
+                transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Smooth transition */
+                padding: 0; /* Reset padding for smooth transition */
+            }
+
+            /* When dropdown parent is active (clicked on mobile) */
+            .navbar-dropdown.active .dropdown-content {
+                max-height: 200px; /* Adjust as needed to show content */
+                padding: 10px 0; /* Add padding when open */
+            }
+
+            .nav-toggle {
+                display: block; /* Show hamburger on mobile */
+            }
+
+            /* Hamburger animation (to change to 'X') */
+            .nav-toggle.active .icon-bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .nav-toggle.active .icon-bar:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-toggle.active .icon-bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+
+
+        /* --- Course Page Specific Styles --- */
+
+        .course-hero {
+            background-color: #2C3E50; /* Deep Midnight Blue */
+            color: #ffffff;
+            padding: 60px 25px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .course-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #F3C622; /* Muted Gold */
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .course-hero p {
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            color: #ECF0F1;
+        }
+
+        .course-hero .instructor {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #BDC3C7;
+            margin-bottom: 10px;
+        }
+
+        .course-hero .enroll-button {
+            display: inline-block;
+            background-color: #F3C622;
+            color: #2C3E50;
+            padding: 15px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .course-hero .enroll-button:hover {
+            background-color: #DAA520;
+            transform: translateY(-3px);
+        }
+
+        .course-details-section {
+            max-width: 1000px;
+            margin: 0 auto 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .course-details-section h2 {
+            color: #2C3E50;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ECF0F1;
+            padding-bottom: 10px;
+        }
+
+        .course-details-section p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #34495E;
+        }
+
+        .what-you-will-learn ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .what-you-will-learn li {
+            background-color: #ECF0F1;
+            padding: 15px 20px;
+            border-left: 5px solid #F3C622;
+            border-radius: 8px;
+            font-size: 1.05em;
+            color: #34495E;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+        .what-you-will-learn li:hover {
+            transform: translateX(5px);
+        }
+
+
+        .course-curriculum .module {
+            margin-bottom: 30px;
+            border: 1px solid #ECF0F1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-curriculum .module-title {
+            background-color: #34495E; /* Dark blue-gray */
+            color: #ffffff;
+            padding: 15px 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-curriculum .module-title .toggle-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease; /* Smooth rotation */
+        }
+
+        .course-curriculum .module-title .toggle-icon::before {
+            content: "▼"; /* Down arrow for closed module */
+        }
+
+
+        .course-curriculum .module-content {
+            padding: 0 20px;
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: #fcfcfc;
+        }
+        .course-curriculum .module.active .module-content {
+            max-height: 500px; /* Adjust as needed to show content */
+            padding: 20px;
+        }
+        .course-curriculum .module.active .module-title .toggle-icon::before {
+            content: "▲"; /* Up arrow for active/open module */
+        }
+        
+
+        .course-curriculum .lesson {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ECF0F1;
+            display: flex;
+            align-items: center;
+        }
+        .course-curriculum .lesson:last-child {
+            border-bottom: none;
+        }
+        .course-curriculum .lesson .lesson-icon {
+            margin-right: 15px;
+            color: #F3C622;
+            font-size: 1.2em;
+        }
+        .course-curriculum .lesson a {
+            color: #2C3E50;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+        .course-curriculum .lesson a:hover {
+            color: #F3C622;
+        }
+
+        .about-instructor {
+            background-color: #ECF0F1;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-instructor img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #F3C622;
+            margin-bottom: 15px;
+        }
+
+        .about-instructor h3 {
+            color: #2C3E50;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .about-instructor p {
+            font-size: 1.05em;
+            color: #555555;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Responsive adjustments for course page */
+        @media (max-width: 768px) {
+            .course-hero {
+                padding: 40px 20px;
+            }
+            .course-hero h1 {
+                font-size: 2.5em;
+            }
+            .course-hero p {
+                font-size: 1em;
+            }
+            .course-details-section {
+                padding: 20px;
+            }
+            .course-details-section h2 {
+                font-size: 1.8em;
+            }
+            .what-you-will-learn ul {
+                grid-template-columns: 1fr;
+            }
+            .course-curriculum .module-title {
+                font-size: 1.2em;
+                padding: 12px 15px;
+            }
+            .course-curriculum .lesson a {
+                font-size: 1em;
+            }
+        }
+
+        /* --- Footer Styles --- */
+        .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        .social-links a {
+            color: #fff;
+            font-size: 1.5em; /* Adjust icon size if using font icons */
+            margin: 0 10px;
+            transition: color 0.3s ease;
+            display: inline-block; /* For proper spacing of images */
+        }
+        .social-links a:hover {
+            color: #F3C622;
+        }
+        /* Basic styling for social icons if they are images */
+        .social-links img {
+            vertical-align: middle; /* Align icons nicely with text if any */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <button class="nav-toggle" aria-label="toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="course-catalog.html">Course Catalog</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="development-page.html">Development Page</a></li>
+                <li><a href="contact-us.html">Contact Us</a></li>
+                
+                <li class="navbar-dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="login.html">Login</a>
+                        <a href="register.html">Register</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="course-hero">
+        <div class="course-hero-content">
+            <h1>Database Design and SQL Programming</h1>
+            <p>Build the backbone of any digital solution. Your journey to data mastery starts with foundational knowledge in database design and practical SQL programming skills.</p>
+            <p class="instructor">Instructor: Chris Hemsworth</p>
+            <a href="#" class="enroll-button">Enroll Now</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="course-details-section">
+            <h2>Course Overview</h2>
+            <p>In today's data-driven world, understanding how to design efficient databases and interact with them using SQL is a fundamental skill. This course will guide you through the principles of relational database design, including normalization, entity-relationship modeling, and schema creation. You'll then dive into SQL programming, learning to write powerful queries for data retrieval, manipulation, and definition. This course combines theoretical knowledge with hands-on exercises to ensure you can confidently build and manage robust data solutions.</p>
+            <p>Suitable for aspiring developers, data analysts, or anyone who wants to gain a strong foundation in managing structured data.</p>
+        </div>
+
+        <div class="course-details-section what-you-will-learn">
+            <h2>What You Will Learn</h2>
+            <ul>
+                <li>Understand relational database concepts and architecture.</li>
+                <li>Master database design principles, including normalization.</li>
+                <li>Create Entity-Relationship Diagrams (ERDs) for data modeling.</li>
+                <li>Write powerful SQL queries for data retrieval (SELECT, JOINs).</li>
+                <li>Perform data manipulation (INSERT, UPDATE, DELETE).</li>
+                <li>Define and manage database schemas (CREATE, ALTER, DROP).</li>
+                <li>Understand transaction management and concurrency control.</li>
+                <li>Optimize SQL queries for performance.</li>
+            </ul>
+        </div>
+
+        <div class="course-details-section course-curriculum">
+            <h2>Course Curriculum</h2>
+            
+            <div class="module">
+                <div class="module-title">
+                    Module 1: Relational Database Concepts & Design Fundamentals
+                    <span class="toggle-icon"></span>
+                </div>
+                <div class="module-content">
+                    <ul>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 1.1: Introduction to Databases and RDBMS</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 1.2: Database Architecture and Components</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 1.3: Entity-Relationship Modeling (ERM)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 1.4: Normalization: 1NF, 2NF, 3NF, BCNF</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 1.5: Designing a Database Schema from Requirements</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-title">
+                    Module 2: Mastering SQL for Data Retrieval
+                    <span class="toggle-icon"></span>
+                </div>
+                <div class="module-content">
+                    <ul>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 2.1: Introduction to SQL and Basic SELECT Statements</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 2.2: Filtering Data with WHERE Clause and Operators</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 2.3: Sorting and Limiting Results (ORDER BY, LIMIT/TOP)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 2.4: Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 2.5: Grouping Data with GROUP BY and HAVING</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-title">
+                    Module 3: Data Manipulation and Advanced SQL
+                    <span class="toggle-icon"></span>
+                </div>
+                <div class="module-content">
+                    <ul>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 3.1: Inserting New Data (INSERT INTO)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 3.2: Updating Existing Data (UPDATE)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 3.3: Deleting Data (DELETE, TRUNCATE)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 3.4: Understanding SQL JOINs (INNER, LEFT, RIGHT, FULL)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 3.5: Subqueries and Common Table Expressions (CTEs)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-title">
+                    Module 4: Database Administration & Optimization
+                    <span class="toggle-icon"></span>
+                </div>
+                <div class="module-content">
+                    <ul>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 4.1: Creating and Modifying Tables (CREATE TABLE, ALTER TABLE)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 4.2: Data Types, Constraints, and Indexes</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 4.3: Views, Stored Procedures, and Functions</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 4.4: Transaction Management (COMMIT, ROLLBACK)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 4.5: SQL Query Optimization Techniques</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-title">
+                    Module 5: Advanced Topics & Real-World Applications
+                    <span class="toggle-icon"></span>
+                </div>
+                <div class="module-content">
+                    <ul>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 5.1: Introduction to NoSQL Databases (Overview)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 5.2: Database Security Best Practices</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 5.3: Backup and Recovery Strategies</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 5.4: Connecting Databases to Applications (Drivers & ORMs)</a></li>
+                        <li class="lesson"><span class="lesson-icon">&#9658;</span> <a href="#">Lesson 5.5: Real-World Database Design Case Studies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div> 
+        
+        <div class="course-details-section about-instructor">
+            <h2>About the Instructor</h2>
+            <img src="https://st3.depositphotos.com/1177973/13772/i/450/depositphotos_137727686-stock-photo-handsome-young-teacher-working.jpg" alt="Instructor Chris Hemsworth">
+            <h3>Chris Hemsworth</h3>
+            <p>Chris Hemsworth is a distinguished database architect and senior software engineer with over a decade of experience designing, implementing, and optimizing complex database systems for various industries. His expertise spans relational database management systems (RDBMS) like MySQL, PostgreSQL, and SQL Server, along with proficiency in advanced SQL programming and performance tuning. Chris is passionate about teaching and simplifying intricate data concepts, empowering students to build robust and scalable data solutions.</p>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Navbar Toggle (Hamburger menu and dropdown on mobile)
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.navbar .nav-links'); // Targeting the <ul> with class 'nav-links'
+            const dropdownParent = document.querySelector('.navbar-dropdown');
+            const dropdownToggle = document.querySelector('.navbar-dropdown .dropbtn');
+
+            // Logic for the main hamburger menu toggle
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active'); // Toggles display of main links
+                    navToggle.classList.toggle('active'); // Toggles hamburger icon animation
+                });
+
+                // Optional: Close main menu when a regular nav link is clicked (useful on mobile)
+                navLinks.querySelectorAll('a:not(.dropbtn)').forEach(link => {
+                    link.addEventListener('click', function() {
+                        // Only close if screen is small (mobile view)
+                        if (window.innerWidth <= 768) { 
+                            navLinks.classList.remove('active');
+                            navToggle.classList.remove('active');
+                            // Also close dropdown if it was open
+                            if (dropdownParent && dropdownParent.classList.contains('active')) {
+                                dropdownParent.classList.remove('active');
+                            }
+                        }
+                    });
+                });
+            }
+
+            // Logic for dropdown menu on mobile (click to open/close)
+            if (dropdownToggle && dropdownParent) {
+                dropdownToggle.addEventListener('click', function(e) {
+                    // Prevent default link behavior on mobile to allow dropdown to toggle
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault(); 
+                        dropdownParent.classList.toggle('active');
+                    }
+                });
+            }
+        });
+
+        // JavaScript for Course Curriculum Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            const moduleTitles = document.querySelectorAll('.module-title');
+
+            moduleTitles.forEach(title => {
+                title.addEventListener('click', function() {
+                    const module = this.closest('.module');
+                    module.classList.toggle('active'); // Toggles the 'active' class on the module
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

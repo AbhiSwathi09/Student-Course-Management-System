@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Your Learning Hub</title>
+    
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* -------------------------------------------------------------
+         * All CSS for your website styling.
+         * For larger projects, it's highly recommended to move this 
+         * into a separate CSS file (e.g., 'style.css') and link it:
+         * <link rel="stylesheet" href="css/style.css">
+         -------------------------------------------------------------
+         */
+
+        /* General Body Styling - Current Colors (Deep Blue & Muted Gold) */
+        body {
+            font-family: 'Arial', sans-serif; /* Fallback font */
+            margin: 0;
+            background-color: #F0F8FF; /* Very pale blue for overall page background */
+            color: #34495E; /* Dark blue-gray for main text readability */
+            line-height: 1.6;
+            min-height: 100vh; /* Ensure body takes full viewport height for footer to be at bottom */
+            display: flex; /* Use flexbox for overall page layout */
+            flex-direction: column; /* Stack navbar, main-content, footer vertically */
+        }
+
+        /* --- Navbar Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .navbar {
+            background-color: #2C3E50; /* Deep Midnight Blue for navbar background */
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+            position: sticky; 
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px; 
+        }
+
+        /* Styling for the entire logo area (both EC text and EduConnect text) */
+        .logo {
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            transition: color 0.3s ease-in-out; 
+        }
+        /* Hover effect for the whole logo area - applies to all text within .logo */
+        .logo:hover .ec-logo-style1, 
+        .logo:hover .ec-logo-style1 span,
+        .logo:hover .logo-text { 
+            color: #F3C622; /* Muted Gold on hover */
+        }
+
+        /* --- Specific CSS for the "EC" Text Logo (Style 1: Modern & Bold) --- */
+        .ec-logo-style1 {
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 2.2em; 
+            color: #FFFFFF; /* White for the 'E' */
+            letter-spacing: -1.5px; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+            transition: color 0.3s ease-in-out; 
+        }
+        .ec-logo-style1 span {
+            color: #F3C622; /* Muted Gold for the 'C' (accent) */
+            transition: color 0.3s ease-in-out; 
+        }
+
+        /* --- New CSS for the "EduConnect" Text --- */
+        .logo-text {
+            font-family: 'Arial', sans-serif; 
+            font-size: 1.4em; 
+            color: #FFFFFF; 
+            font-weight: 500; 
+            margin-left: 10px; 
+            transition: color 0.3s ease-in-out; 
+        }
+
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Makes list items horizontal */
+        }
+
+        .navbar ul li {
+            margin-left: 35px; /* Spacing between all nav items */
+        }
+
+        /* This applies to ALL direct <a> children of .navbar ul li,
+            including your standard links and the .dropbtn */
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0; /* Add vertical padding for larger clickable area */
+            display: block; /* Makes the entire list item's link area clickable */
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a:focus {
+            color: #F3C622; /* Muted Gold on hover */
+            transform: translateY(-2px); 
+        }
+
+        /* --- Dropdown for Account (Login/Register box) Styling --- */
+        .navbar-dropdown {
+            position: relative; 
+            /* The margin-left is now handled by .navbar ul li, so no need to repeat here */
+        }
+
+        /* The .dropbtn inherits most styling from .navbar ul li a.
+            Only add specific overrides for its role as a dropdown trigger. */
+        .navbar-dropdown .dropbtn {
+            background-color: transparent; /* Ensure no background */
+            border: none; /* Ensure no border */
+            cursor: pointer; /* Indicate it's clickable */
+            color: #ffffff;
+            font-weight: 600; 
+            font-size: 1.08em; 
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; 
+            padding: 10px 0;
+            display: block;
+        }
+        .navbar-dropdown .dropbtn:hover {
+            color: #F3C622;
+            transform: translateY(-2px);
+        }
+
+        .dropdown-content {
+            display: none; 
+            position: absolute;
+            background-color: #2C3E50; /* Use navbar color for dropdown background */
+            min-width: 160px; 
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1; 
+            right: 0; /* Align to the right edge of the parent dropdown button */
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        .dropdown-content a {
+            color: #ffffff; 
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left; 
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            font-weight: 500;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #34495E; /* Slightly darker blue-gray on hover for dropdown items */
+            color: #FFFFFF;
+        }
+
+        /* Show the dropdown menu on hover */
+        .navbar-dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Logout button style within the dropdown */
+        .logout-button-dropdown {
+            background-color: #f44336; /* Red for logout */
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            width: auto; 
+            margin: 5px 16px 8px; 
+            display: block; 
+            text-align: center; 
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button-dropdown:hover {
+            background-color: #d32f2f;
+        }
+
+        /* --- Main Content Styling - Current Colors (Deep Blue & Muted Gold) --- */
+        .main-content {
+            flex-grow: 1; /* Allows main content to take up available vertical space */
+            padding: 60px 25px; 
+            max-width: 1200px; /* Increased max-width for broader content area */
+            margin: 40px auto; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            text-align: center; /* Center text content within main-content */
+            min-height: calc(100vh - 200px); /* Adjust based on navbar/footer height to push footer down */
+            display: flex; /* Use flexbox to arrange inner content */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Centers items horizontally */
+        }
+
+        .main-content h1 {
+            color: #2C3E50; /* Use the Deep Midnight Blue for main headings */
+            font-size: 2.8em; 
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); 
+        }
+
+        .main-content h2 {
+            color: #2C3E50; /* Use the Deep Midnight Blue for secondary headings */
+            font-size: 2.2em; 
+            margin-top: 40px; /* Space above sub-heading */
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555555; /* Standard gray for paragraph text */
+            margin-bottom: 20px;
+        }
+
+        /* New container for the call-to-action buttons */
+        .call-to-action-buttons-group {
+            display: flex; /* Use flexbox to arrange buttons side-by-side */
+            justify-content: center; /* Center the buttons within their group */
+            flex-wrap: wrap; /* Allow buttons to wrap to the next line on smaller screens */
+            gap: 20px; /* Space between the buttons */
+            margin-top: 30px; /* Space from the paragraph above */
+            width: 100%; /* Ensure it takes full width to center its content */
+        }
+
+        .call-to-action-button {
+            display: inline-block; /* Kept for consistency, but flex item handles block behavior */
+            background-color: #F3C622; /* Muted Gold for call to action button */
+            color: #2C3E50; /* Deep Midnight Blue text for contrast on the accent button */
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            /* Removed margin from here, replaced by 'gap' on the parent container */
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            text-align: center; /* Ensure text inside button is centered */
+        }
+
+        .call-to-action-button:hover {
+            background-color: #DAA520; /* Slightly darker gold on hover for button */
+            transform: translateY(-3px);
+        }
+
+        /* --- New CSS for Course Cards (if used on this page or linked) --- */
+        .courses-container {
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 30px; 
+            padding: 20px;
+            margin-top: 30px; 
+        }
+
+        .course-card {
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            overflow: hidden; 
+            width: 320px; 
+            max-width: 100%; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            display: flex;
+            flex-direction: column; 
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); 
+        }
+
+        .course-image {
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-bottom: 1px solid #eee; 
+        }
+
+        .card-content {
+            padding: 20px;
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column; 
+        }
+
+        .course-card h3 {
+            color: #2C3E50; 
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .course-description {
+            color: #555555; 
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-align: left;
+            flex-grow: 1; 
+        }
+
+        .course-details p {
+            margin: 5px 0; 
+            font-size: 0.88em;
+            color: #666; 
+            text-align: left;
+        }
+
+        .course-details strong {
+            color: #34495E; 
+        }
+
+        .card-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around; 
+            gap: 10px; 
+        }
+
+        .card-actions button {
+            background-color: #F3C622; 
+            color: #2C3E50; 
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            flex: 1; 
+        }
+
+        .card-actions button:hover {
+            background-color: #DAA520; 
+            transform: translateY(-2px); 
+        }
+
+        /* --- Footer Styling --- */
+        .footer {
+            background-color: #2C3E50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom of the flex container (body) */
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer p {
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 600px) { /* On screens up to 600px wide (e.g., mobile) */
+            .navbar-container {
+                flex-direction: column;
+                padding: 0 15px;
+            }
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px;
+            }
+            .navbar ul li {
+                margin: 10px 0;
+            }
+            .navbar-dropdown .dropdown-content {
+                right: auto; /* Reset right alignment */
+                left: 50%; /* Center the dropdown */
+                transform: translateX(-50%); /* Adjust for centering */
+            }
+            .main-content {
+                padding: 30px 15px;
+                margin: 20px auto;
+                min-height: calc(100vh - 150px); /* Adjust min-height for smaller screens */
+            }
+            /* Ensure buttons stack on very small screens */
+            .call-to-action-buttons-group {
+                flex-direction: column; /* Stack buttons vertically on small screens */
+                align-items: center; /* Center stacked buttons */
+            }
+            .call-to-action-button {
+                width: 80%; /* Make buttons take more width when stacked */
+                max-width: 300px; /* Limit width even when stacked */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <div class="ec-logo-style1">E<span>C</span></div>
+                <span class="logo-text">EduConnect</span>
+            </a>
+            <ul>
+                <li><a href="home.html">Home</a></li> 
+                <li><a href="course-catalog.html">Course Catalog</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="about us.html">About Us</a></li>
+                <li><a href="development.html">Development Page</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                
+                <li class="navbar-dropdown">
+                    <span id="accountDropdownText" class="dropbtn">Account</span>
+                    <div class="dropdown-content" id="accountDropdownContent">
+                        </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>Welcome to EduConnect! Your Journey Starts Here.</h1>
+        <p>Empowering students with seamless access to courses and resources, and providing instructors with intuitive tools for effective course management.
+        Whether you're looking to expand your knowledge or manage your classes, EduConnect is designed to make your academic life easier and more connected.</p>
+        
+        <h2>Explore Our Course Catalog!</h2>
+        <p>Discover a wide range of courses in various fields.</p>
+        
+        <div class="call-to-action-buttons-group">
+            <a href="course-catalog.html" class="call-to-action-button">View All Courses</a>
+            <a href="register.html" class="call-to-action-button">Join EduConnect Today!</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2025 EduConnect. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        console.log("Index page script is running!"); 
+
+        // Function to handle logout - can be shared across pages
+        function logout() {
+            localStorage.removeItem("student"); // Remove student data from local storage
+            window.location.href = "login.html"; // Redirect to login page
+        }
+
+        // --- Navbar Initialization Logic for dynamic content ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const student = JSON.parse(localStorage.getItem("student"));
+            const accountDropdownText = document.getElementById("accountDropdownText");
+            const accountDropdownContent = document.getElementById("accountDropdownContent");
+
+            if (student) {
+                // If logged in, display username and logout option
+                accountDropdownText.innerText = `Welcome, ${student.username}`;
+                accountDropdownContent.innerHTML = `
+                    <a href="profile.html">Profile</a>
+                    <button class="logout-button-dropdown" onclick="logout()">Logout</button>
+                `;
+            } else {
+                // If not logged in, show login/register links
+                accountDropdownText.innerText = "Account"; // Reset text if it somehow changed
+                accountDropdownContent.innerHTML = `
+                    <a href="login.html">Login</a>
+                    <a href="register.html">Register</a>
+                `;
+            }
+        });
+    </script>
+
+</body>
+</html>
